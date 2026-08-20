@@ -1,8 +1,18 @@
-{% extends 'shared/base.html' %} {% load static %} {% block content %}
-<section class="conteudo">
-  <section class="banner">
-    <img class="banner__imagem" src="{% static '/assets/imagens/Banner(2).png' %}" alt="banner Alura Space" />
-    <h1 class="banner__titulo">A galeria mais completa de fotos do espaço!</h1>
-  </section>
+{% extends 'shared/base.html' %} {% block content %}
+<section class="galeria" style="margin-left: 5em">
+  <form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      {% for field in form.visible_fields %}
+      <div class="col-12 col-lg-12" style="margin-bottom: 10px">
+        <label for="{{ field.id_for_label }}" style="color: #d9d9d9; margin-bottom: 5px">{{field.label}}</label>
+        {{ field }}
+      </div>
+      {% endfor %}
+    </div>
+    <div>
+      <button type="submit" class="btn btn-success col-12" style="padding: top 5px">Logar</button>
+    </div>
+  </form>
 </section>
 {% endblock %}
