@@ -45,7 +45,10 @@ def nova_imagem(request):
     if request.method == "POST":
         form = FotografiaForms(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            fotografia = form.save(commit=False)
+            fotografia.usuario = request.user
+            fotografia.publicada = True
+            fotografia.save()
             messages.success(request, "Nova foto cadastrada!")
             return redirect("index")
 
