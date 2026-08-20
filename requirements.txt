@@ -1,5 +1,13 @@
 asgiref
+boto3
+botocore
 Django
-Pillow
+django-storages
+jmespath
+pillow
+python-dateutil
 python-dotenv
+s3transfer
+six
 sqlparse
+urllib3
