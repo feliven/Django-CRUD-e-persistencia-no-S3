@@ -23,3 +23,10 @@ class FotografiaForms(forms.ModelForm):
             ),
             "usuario": forms.Select(attrs={"class": "form-control"}),
         }
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.publicada = True
+        if commit:
+            instance.save()
+        return instance

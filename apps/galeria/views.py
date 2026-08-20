@@ -40,7 +40,7 @@ def nova_imagem(request):
         messages.error(request, "Usuário não logado")
         return redirect("login")
 
-    form = FotografiaForms
+    form = FotografiaForms()
 
     if request.method == "POST":
         form = FotografiaForms(request.POST)
