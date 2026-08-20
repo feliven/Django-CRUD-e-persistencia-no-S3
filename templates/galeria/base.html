@@ -13,6 +13,10 @@
   </head>
 
   <body>
-    {% include 'partials/_menu.html' %} {% block content %}{% endblock %} {% include 'partials/_footer.html' %}
+    <div class="pagina-inicial">
+      {% include 'partials/_header.html' %}
+      <main class="principal">{% include 'partials/_menu.html' %} {% block content %}{% endblock %}</main>
+      {% include 'partials/_footer.html' %}
+    </div>
   </body>
 </html>
