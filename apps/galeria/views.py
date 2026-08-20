@@ -73,12 +73,18 @@ def editar_imagem(request, foto_id):
     )
 
 
-def deletar_imagem(request):
+def deletar_imagem(request, foto_id):
     if not request.user.is_authenticated:
         messages.error(request, "Usuário não logado")
         return redirect("login")
 
-    return render(
-        request,
-        "galeria/deletar_imagem.html",
-    )
+    try:
+        fotografia = Fotografia.objects.get(id=foto_id)
+        fotografia.delete()
+        messages.success(request, "Foto deletada com sucesso!")
+    except Fotografia.DoesNotExist:
+        messages.error(request, "Foto não encontrada.")
+    except Exception as e:
+        messages.error(request, f"Erro ao deletar: {e}")
+
+    return redirect("index")
