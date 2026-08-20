@@ -32,7 +32,7 @@ def buscar(request):
         if nome_a_buscar:
             fotografias = fotografias.filter(nome__icontains=nome_a_buscar)
 
-    return render(request, "galeria/buscar.html", {"cards": fotografias})
+    return render(request, "galeria/index.html", {"cards": fotografias})
 
 
 def nova_imagem(request):
@@ -91,3 +91,8 @@ def deletar_imagem(request, foto_id):
         messages.error(request, f"Erro ao deletar: {e}")
 
     return redirect("index")
+
+
+def filtro(request, categoria):
+    fotografias = Fotografia.objects.filter(categoria=categoria)
+    return render(request, "galeria/index.html", {"cards": fotografias})
