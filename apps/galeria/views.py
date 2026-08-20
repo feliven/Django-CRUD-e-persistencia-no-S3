@@ -36,11 +36,27 @@ def buscar(request):
 
 
 def nova_imagem(request):
-    forms = FotografiaForms
-    return render(request, "galeria/nova_imagem.html", {"form": forms})
+    if not request.user.is_authenticated:
+        messages.error(request, "Usuário não logado")
+        return redirect("login")
+
+    form = FotografiaForms
+
+    if request.method == "POST":
+        form = FotografiaForms(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Nova foto cadastrada!")
+            return redirect("index")
+
+    return render(request, "galeria/nova_imagem.html", {"form": form})
 
 
 def editar_imagem(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "Usuário não logado")
+        return redirect("login")
+
     return render(
         request,
         "galeria/editar_imagem.html",
@@ -48,6 +64,10 @@ def editar_imagem(request):
 
 
 def deletar_imagem(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "Usuário não logado")
+        return redirect("login")
+
     return render(
         request,
         "galeria/deletar_imagem.html",

@@ -1,6 +1,6 @@
 {% extends 'shared/base.html' %} {% block content %}
 <section class="galeria" style="margin-left: 5em">
-  <form action="{% url 'login' %}" method="POST">
+  <form action="{% url 'nova_imagem' %}" method="POST">
     {% csrf_token %}
     <div class="row">
       {% for field in form.visible_fields %}
